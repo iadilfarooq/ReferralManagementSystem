@@ -16,15 +16,13 @@ namespace ReferralManagementSystem.Controllers
 
         public IActionResult Index()
         {
+            // Check if user is logged in
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
             {
-                return RedirectToAction("Login", "Account"); // Redirect to login if not authenticated
+                return RedirectToAction("Login", "Account");
             }
 
             ViewBag.Username = HttpContext.Session.GetString("Username");
-            ViewBag.Email = HttpContext.Session.GetString("Email");
-            ViewBag.Role = HttpContext.Session.GetString("Role");
-
             return View();
         }
 

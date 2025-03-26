@@ -3,9 +3,11 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ReferralManagementSystem.Models;
 using ReferralManagementSystem.Repository;
 using ReferralManagementSystem.Repository.IRepository;
+using ReferralManagementSystem.Utilities;
 
 namespace ReferralManagementSystem.Controllers
 {
+    [AuthorizeRole("2")]
     public class DoctorController : Controller
     {
         private readonly IDoctorRepository _doctorRepository;

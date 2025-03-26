@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using ReferralManagementSystem.Models;
 using ReferralManagementSystem.Repository;
 using ReferralManagementSystem.Repository.IRepository;
+using ReferralManagementSystem.Utilities;
 
 namespace ReferralManagementSystem.Controllers
 {
+    [AuthorizeRole("2")]
     public class UserController : Controller
     {
         private readonly IUsersRepository _usersRepository;

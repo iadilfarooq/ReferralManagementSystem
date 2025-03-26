@@ -14,24 +14,21 @@ namespace ReferralManagementSystem
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            // Add Session Services
+            builder.Services.AddSession();
+
             builder.Services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromMinutes(10); // Set session timeout
-                options.Cookie.HttpOnly = true; // Secure session cookie
-                options.Cookie.IsEssential = true; // Ensure session is always stored
+                options.IdleTimeout = TimeSpan.FromMinutes(5); // 5 minutes
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
             });
+
 
             builder.Services.AddScoped<IDoctorRepository, DoctorRepository>();
             builder.Services.AddScoped<IUsersRepository, UsersRepository>();
             builder.Services.AddScoped<IRolesRepository, RolesRepository>();
             builder.Services.AddScoped<IReferralHospitalDetailRepository, ReferralHospitalDetailRepository>();
             builder.Services.AddScoped<IPatientReferralFormRepository, PatientReferralFormRepository>();
-
-            // Register your custom session authentication filter
-            builder.Services.AddScoped<SessionAuthFilter>();
-            builder.Services.AddScoped<RoleAuthFilter>(provider => new RoleAuthFilter(provider.GetRequiredService<IUsersRepository>(), "Admin"));
-
 
             var app = builder.Build();
 
@@ -50,8 +47,7 @@ namespace ReferralManagementSystem
 
             app.UseRouting();
 
-            app.UseAuthentication();  // Enable Authentication
-            app.UseAuthorization();   // Enable Authorization
+            app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",

@@ -1,4 +1,5 @@
-﻿using ReferralManagementSystem.Models;
+﻿using System.Data;
+using ReferralManagementSystem.Models;
 
 namespace ReferralManagementSystem.Repository.IRepository
 {
@@ -9,6 +10,6 @@ namespace ReferralManagementSystem.Repository.IRepository
         Task<Users> GetUserByIdAsync(int id);
         Task UpdateUserAsync(Users users,IFormFile picture);
         Task DeleteUserAsync(int id);
-        Task<Users> AuthenticateAsync(string username, string password);
+        DataRow ValidateUser(string username, string password);
     }
 }

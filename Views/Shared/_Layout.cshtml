@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ReferralManagementSystem.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/maincss.css" asp-append-version="true" />
 </head>
 <body>
     <header>
@@ -23,22 +22,46 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="PatientRF" asp-action="Index">Patient Referral Detail</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Doctor" asp-action="Index">Doctor</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Hospital" asp-action="Index">Hospital</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark ms-auto" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
-                        </li>
+
+                        @if (new[] { "1", "2" }.Contains(Context.Session.GetString("Role")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="PatientRF" asp-action="Index">Patient Referral Detail</a>
+                            </li>
+                        }
+
+                        @if (Context.Session.GetString("Role") == "2")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Doctor" asp-action="Index">Doctor List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Hospital" asp-action="Index">Hospital List</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Users List</a>
+                            </li>
+                        }
+
+                        @if (new[] { "1", "2" }.Contains(Context.Session.GetString("Role")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        }
                     </ul>
+
+                    @if (new[] { "1", "2" }.Contains(Context.Session.GetString("Role")))
+                    {
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <label class="nav-link text-dark">Hello, Mr. @ViewBag.Username.ToUpper()</label>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                            </li>
+                        </ul>
+                    }
                 </div>
             </div>
         </nav>

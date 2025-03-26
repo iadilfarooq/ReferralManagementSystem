@@ -5,12 +5,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using ReferralManagementSystem.Models;
 using ReferralManagementSystem.Repository;
 using ReferralManagementSystem.Repository.IRepository;
+using ReferralManagementSystem.Utilities;
 
 namespace ReferralManagementSystem.Controllers
 {
-    [ServiceFilter(typeof(SessionAuthFilter))]
-    [ServiceFilter(typeof(RoleAuthFilter), Arguments = new object[] { "Admin" })] // Only Admins can access
-
+    [AuthorizeRole("1")]
     public class PatientRFController : Controller
     {
         private readonly IPatientReferralFormRepository _patientReferralFormRepository;

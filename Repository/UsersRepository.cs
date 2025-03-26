@@ -46,8 +46,6 @@ namespace ReferralManagementSystem.Repository
             return usersDetails;
         }
 
-        
-
         public async Task<Users> GetUserByIdAsync(int id)
         {
             Users user = null;
@@ -172,8 +170,6 @@ namespace ReferralManagementSystem.Repository
             await command.ExecuteNonQueryAsync();
         }
 
-
-
         public async Task DeleteUserAsync(int userId)
         {
             using var connection = new SqlConnection(_connectionString);
@@ -204,30 +200,25 @@ namespace ReferralManagementSystem.Repository
             await command.ExecuteNonQueryAsync();
         }
 
-        public async Task<Users?> AuthenticateAsync(string username, string password)
+        // Validate User with Username and Password
+        public DataRow ValidateUser(string username, string password)
         {
-            using var connection = new SqlConnection(_connectionString);
-            await connection.OpenAsync();
-
-            string query = "SELECT Id, Username, Email, RoleId FROM Users WHERE Username = @Username AND PasswordHash = @Password";
-
-            using var command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@Username", username);
-            command.Parameters.AddWithValue("@Password", password);  // Hash in real-world apps!
-
-            using var reader = await command.ExecuteReaderAsync();
-            if (await reader.ReadAsync())
+            using (SqlConnection con = new SqlConnection(_connectionString))
             {
-                return new Users
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand("SELECT * FROM Users WHERE Username = @Username AND PasswordHash = @PasswordHash", con))
                 {
-                    Id = reader.GetInt32(0),
-                    Username = reader.GetString(1),
-                    Email = reader.GetString(2),
-                    RoleId = reader.GetInt32(3)
-                };
-            }
+                    cmd.Parameters.AddWithValue("@Username", username);
+                    cmd.Parameters.AddWithValue("@PasswordHash", password);
 
-            return null; // User not found
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+                        return dt.Rows.Count > 0 ? dt.Rows[0] : null;
+                    }
+                }
+            }
         }
     }
 }
