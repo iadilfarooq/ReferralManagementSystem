@@ -18,7 +18,7 @@ namespace ReferralManagementSystem.Models
         [StringLength(20, ErrorMessage = "Department cannot exceed 20 characters.")]
         public string? Department { get; set; }
 
-        public int number{get; set;}
+        "public int number{get; set;}"
         [Required]
         [StringLength(11, ErrorMessage = "Phone Number must be 11 characters.")]
         [Phone(ErrorMessage = "Please enter a valid phone number.")]
