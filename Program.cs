@@ -13,7 +13,7 @@ namespace ReferralManagementSystem
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+//add session midleware here and set bellow
             builder.Services.AddSession();
 
             builder.Services.AddSession(options =>
