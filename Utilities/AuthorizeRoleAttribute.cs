@@ -11,7 +11,7 @@ namespace ReferralManagementSystem.Utilities
         {
             _roles = roles;
         }
-
+//override method
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var role = context.HttpContext.Session.GetString("Role");
