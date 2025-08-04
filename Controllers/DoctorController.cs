@@ -26,6 +26,7 @@ namespace ReferralManagementSystem.Controllers
         [HttpPost]
         public IActionResult Create(DoctorDetails doctorDetails)
         {
+        //model state chek
             if (!ModelState.IsValid)
             {
                 return BadRequest();
