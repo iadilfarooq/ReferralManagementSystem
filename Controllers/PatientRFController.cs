@@ -48,7 +48,9 @@ namespace ReferralManagementSystem.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(PatientReferralForm patientReferralForm)
         {
+        //if Role is not mapped in model class then no need here to remove modelstate for role
             //ModelState.Remove("Role");
+            
             if (!ModelState.IsValid)
             {
                 var refferelHosptialDetail = await _referralHospitalDetailRepository.GetHospitalAsync();
