@@ -12,7 +12,7 @@ namespace ReferralManagementSystem.Repository
         {
             _connectionString = configuration.GetConnectionString("dbcs");
         }
-
+    //get all patient 
         public async Task<List<PatientReferralForm>> GetPatientRFDetailsAsync()
         {
             var patientRF = new List<PatientReferralForm>();
