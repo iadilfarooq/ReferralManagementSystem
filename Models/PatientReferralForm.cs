@@ -13,16 +13,19 @@ namespace ReferralManagementSystem.Models
         [StringLength(20, ErrorMessage = "Referred From cannot exceed 20 characters.")]
         public string ReferredFrom { get; set; }
 
-        [Required]
-        [StringLength(13, ErrorMessage = "Nature of Referral cannot exceed 13 characters.")]
-        [RegularExpression("Emergency|Non Emergency", ErrorMessage = "Nature of Referral must be either 'Emergency' or 'Non Emergency'.")]
-        public string NatureOfReferral { get; set; }
+        
 
         [Required]
         [StringLength(7, ErrorMessage = "Shift cannot exceed 7 characters.")]
         [RegularExpression("Morning|Evening|Night", ErrorMessage = "Shift must be either 'Morning', 'Evening', or 'Night'.")]
         public string Shift { get; set; }
+        
+        [Required]
+        [StringLength(13, ErrorMessage = "Nature of Referral cannot exceed 13 characters.")]
+        [RegularExpression("Emergency|Non Emergency", ErrorMessage = "Nature of Referral must be either 'Emergency' or 'Non Emergency'.")]
+        public string NatureOfReferral { get; set; }
 
+        
         [Required]
         [StringLength(20, ErrorMessage = "Patient Name cannot exceed 20 characters.")]
         public string PatientName { get; set; }
