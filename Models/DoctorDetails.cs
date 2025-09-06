@@ -10,13 +10,15 @@ namespace ReferralManagementSystem.Models
         [Required]
         [StringLength(20, ErrorMessage = "Name cannot exceed 20 characters.")]
         public string Name { get; set; }
-
+       
+        [StringLength(20, ErrorMessage = "Department cannot exceed 20 characters.")]
+        public string? Department { get; set; }
+        
         [Required]
         [StringLength(20, ErrorMessage = "Designation cannot exceed 20 characters.")]
         public string Designation { get; set; }
 
-        [StringLength(20, ErrorMessage = "Department cannot exceed 20 characters.")]
-        public string? Department { get; set; }
+ 
 
         "public int number{get; set;}"
         [Required]
